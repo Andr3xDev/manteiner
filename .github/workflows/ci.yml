@@ -1,24 +1,22 @@
 name: CI
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 env:
   CARGO_TERM_COLOR: always
-
 jobs:
   fmt:
-    name: Format (rustfmt)
+    name: Formatter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt
-      - run: cargo fmt --all -- --check
+      - name: Run format
+        run: cargo fmt --all -- --check
 
   validate:
     name: Validate (${{ matrix.crate }})
@@ -26,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        crate: [core, cli, tui]
+        crate: [manteiner-core, manteiner-cli, manteiner-tui]
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -37,7 +35,7 @@ jobs:
           shared-key: ${{ matrix.crate }}
       - name: Build
         run: cargo build --package ${{ matrix.crate }} --verbose
-      - name: Clippy
+      - name: Run clippy
         run: cargo clippy --package ${{ matrix.crate }} --all-targets -- -D warnings
-      - name: Test
+      - name: Run tests
         run: cargo test --package ${{ matrix.crate }} --verbose

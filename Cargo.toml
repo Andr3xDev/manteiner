@@ -1,13 +1,7 @@
 [workspace]
-resolve = true
-members = [
-    "manteiner-core",
-    "manteiner-tui",
-    "manteiner-cli",
-]
+resolve = "2"
+members = ["core", "tui", "cli"]
 
 [workspace.package]
 version = "0.0.1"
 edition = "2024"
-
-[dependencies]
