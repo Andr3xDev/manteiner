@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # Placeholder: cross-platform binary builds for cli/tui
+  build-binaries:
+    name: Build binaries (${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+          # - target: x86_64-apple-darwin
+          #   os: macos-latest
+          # - target: x86_64-pc-windows-msvc
+          #   os: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - run: cargo build --release --package cli --package tui --target ${{ matrix.target }}
+      # TODO: attach binaries to the GitHub Release (softprops/action-gh-release)
+
+  # Placeholder: publishing to crates.io (once core is a mature library)
+  publish-crates-io:
+    name: Publish to crates.io
+    runs-on: ubuntu-latest
+    needs: build-binaries
+    if: false  # enable when you decide to publish
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo publish --package core --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  # Placeholder: publishing to AUR (Arch User Repository), given your Arch setup
+  publish-aur:
+    name: Publish to AUR
+    runs-on: ubuntu-latest
+    needs: build-binaries
+    if: false  # enable once a PKGBUILD exists
+    steps:
+      - run: echo "TODO: generate PKGBUILD and push to the AUR repo"
