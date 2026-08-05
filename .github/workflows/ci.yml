@@ -8,7 +8,7 @@ env:
   CARGO_TERM_COLOR: always
 jobs:
   fmt:
-    name: Format (rustfmt)
+    name: Formatter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +19,7 @@ jobs:
         run: cargo fmt --all -- --check
 
   validate:
-    name: Validate (${{ matrix.crate }})
+    name: Validate ${{ matrix.crate }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
