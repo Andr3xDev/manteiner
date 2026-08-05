@@ -19,7 +19,7 @@ jobs:
         run: cargo fmt --all -- --check
 
   validate:
-    name: Validate ${{ matrix.crate }}
+    name: Validate (${{ matrix.crate }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
