@@ -1,6 +1,6 @@
 [workspace]
 resolve = "2"
-members = ["manteiner-core", "manteiner-tui", "manteiner-cli"]
+members = ["core", "tui", "cli"]
 
 [workspace.package]
 version = "0.0.1"
