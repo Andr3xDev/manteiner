@@ -1,0 +1,6 @@
+[package]
+name = "manteiner-cli"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

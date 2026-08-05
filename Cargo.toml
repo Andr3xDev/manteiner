@@ -1,5 +1,12 @@
-[package]
-name = "manteiner"
+[workspace]
+resolve = true
+members = [
+    "manteiner-core",
+    "manteiner-tui",
+    "manteiner-cli",
+]
+
+[workspace.package]
 version = "0.0.1"
 edition = "2024"
 
