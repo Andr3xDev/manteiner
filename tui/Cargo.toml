@@ -1,0 +1,9 @@
+[package]
+name = "manteiner-tui"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+manteiner-core = { path = "../manteiner-core" }
+crossterm = "0.29.0"
+ratatui = "0.30.2"
